@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pixtidy</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Pixtidy</h1>
+    <div>
+        <label>Latitude: <input type="text" id="lat" /></label>
+        <label>Longitude: <input type="text" id="lon" /></label>
+        <button onclick="addPin($('#lat').val(), $('#lon').val())">Add Pin</button>
+        <button onclick="removePins()">Remove Pins</button>
+    </div>
+    <div id="map" style="height: 600px; width: 100%;"></div>
+    <script>
+        var map = L.map('map').setView([52.22977, 21.01178], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (event) {
+            var layer = event.layer;
+            drawnItems.addLayer(layer);
+            var bounds = layer.getBounds();
+            printBounds(bounds);
+        });
+    </script>
+    <iframe src="map.html" style="width: 100%; height: 600px; border: none;"></iframe>
+</body>
+</html>
