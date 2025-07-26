@@ -1,0 +1,10 @@
+3.11.2024
+- Poprawiłem problem z kliknięciem na nazwę grupy przed 
+  naciśnięciem przycisku Show. Dublowała się nazwa grupy, 
+  już tak sie nie dzieje.
+8.12.2024
+- Poprawilem problem z nieznikaniem okna wyboru katalogu po powtornym
+  otwieraniu katalogu. (okno przyslanialo pasek postępu ladowania katalogu.
+
+Pakuje do wersji 1.0.3.0
+-------------------------------------------------------------------------
